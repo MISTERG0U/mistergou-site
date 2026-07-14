@@ -1,301 +1,370 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>mistergou — Independent App Developer</title>
+<meta name="description" content="mistergou builds small, honest apps. Currently shipping HonestVIN, a free VIN risk checker for used-car buyers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black: #0b0b0d;
+    --panel: #151517;
+    --panel-2: #1b1b1e;
+    --silver: #9a9ca0;
+    --silver-bright: #d8dade;
+    --gold: #c9a24b;
+    --gold-bright: #e8c777;
+    --red: #d3273e;
+    --white: #f4f4f2;
+    --hairline: #2a2a2d;
+  }
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
 
-  <title>mistergou | Independent App Developer</title>
+  body{
+    margin: 0;
+    background: var(--black);
+    color: var(--white);
+    font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+    line-height: 1.55;
+    background-image:
+      repeating-linear-gradient(180deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px),
+      radial-gradient(circle at 12% -10%, rgba(211,39,62,0.10), transparent 45%),
+      radial-gradient(circle at 90% 10%, rgba(201,162,75,0.08), transparent 40%);
+  }
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+  a{ color: var(--gold-bright); text-decoration: none; }
+  a:hover{ text-decoration: underline; }
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--red);
+    outline-offset: 3px;
+  }
 
-    body {
-      margin: 0;
-      background: #151515;
-      color: #eeeeee;
-      font-family: Arial, Helvetica, sans-serif;
-      line-height: 1.6;
-    }
+  .wrap{ max-width: 880px; margin: 0 auto; padding: 0 24px; }
 
-    .page {
-      display: flex;
-      min-height: 100vh;
-    }
+  .mono{ font-family: 'JetBrains Mono', monospace; }
 
-    /* Left navigation */
+  /* NAV */
+  header.site{
+    border-bottom: 1px solid var(--hairline);
+    background: rgba(11,11,13,0.92);
+    backdrop-filter: blur(6px);
+    position: sticky; top: 0; z-index: 10;
+  }
+  .nav-row{
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 0;
+  }
+  .brand{
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+  .brand:hover{ text-decoration: none; }
+  .led{
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 8px var(--red), 0 0 2px var(--red);
+    animation: pulse 2.4s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+  @keyframes pulse{ 0%,100%{ opacity: 1; } 50%{ opacity: 0.35; } }
 
-    .sidebar {
-      width: 245px;
-      padding: 35px 24px;
-      background: #1d1d1d;
-      border-right: 1px solid #333333;
-    }
+  nav.links{ display: flex; gap: 22px; }
+  nav.links a{
+    color: var(--silver);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  nav.links a:hover{ color: var(--gold-bright); text-decoration: none; }
 
-    .brand {
-      margin: 0 0 5px;
-      color: #ffffff;
-      font-size: 28px;
-    }
+  /* HUD FRAME (hero) */
+  .hero{ padding: 56px 0 48px; }
+  .hud-frame{
+    position: relative;
+    border: 1px solid var(--hairline);
+    background: linear-gradient(180deg, var(--panel), var(--panel-2));
+    padding: 36px 30px 30px;
+  }
+  .hud-frame svg.frame-draw{
+    position: absolute; inset: -1px; width: calc(100% + 2px); height: calc(100% + 2px);
+    pointer-events: none;
+  }
+  .hud-frame svg.frame-draw rect{
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 1.5;
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    animation: draw 1.6s ease-out forwards;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hud-frame svg.frame-draw rect{ animation: none; stroke-dashoffset: 0; }
+  }
+  @keyframes draw{ to{ stroke-dashoffset: 0; } }
 
-    .developer-label {
-      margin: 0 0 35px;
-      color: #999999;
-      font-size: 14px;
-    }
+  .readout{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin: 0 0 20px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .readout::before{ content: '◆'; font-size: 9px; color: var(--gold); }
 
-    .menu-title {
-      margin-bottom: 12px;
-      color: #d4af37;
-      font-size: 13px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
+  h1.callsign{
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+    font-size: clamp(34px, 6vw, 56px);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+    background: linear-gradient(180deg, var(--white) 0%, var(--silver-bright) 55%, var(--silver) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  p.role{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold-bright);
+    margin: 0 0 22px;
+  }
+  p.lede{
+    font-size: 16.5px;
+    color: var(--silver-bright);
+    max-width: 54ch;
+    margin: 0 0 24px;
+  }
+  .hud-foot{
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+    padding-top: 18px; margin-top: 6px; border-top: 1px dashed var(--hairline);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--silver);
+    letter-spacing: 0.05em;
+  }
 
-    nav {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+  /* SECTIONS */
+  section{ padding: 44px 0; border-top: 1px solid var(--hairline); }
+  h2.section-head{
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--silver);
+    margin: 0 0 24px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  h2.section-head::before{ content: '§'; color: var(--red); font-weight: 700; }
+  h2.section-head::after{ content: ''; flex: 1; height: 1px; background: var(--hairline); }
 
-    nav a {
-      display: block;
-      padding: 12px 14px;
-      color: #dddddd;
-      text-decoration: none;
-      background: #252525;
-      border: 1px solid #333333;
-      border-radius: 7px;
-    }
+  /* BRACKET CARD */
+  .bracket-card{
+    position: relative;
+    border: 1px solid var(--hairline);
+    background: var(--panel);
+    padding: 24px;
+  }
+  .bracket-card::before, .bracket-card::after,
+  .bracket-corner-b::before, .bracket-corner-b::after{
+    content: '';
+    position: absolute;
+    width: 16px; height: 16px;
+    border-color: var(--gold);
+    border-style: solid;
+    border-width: 0;
+  }
+  .bracket-card::before{ top: -1px; left: -1px; border-top-width: 2px; border-left-width: 2px; }
+  .bracket-card::after{ top: -1px; right: -1px; border-top-width: 2px; border-right-width: 2px; }
+  .bracket-card .bracket-corner-b::before{ bottom: -1px; left: -1px; border-bottom-width: 2px; border-left-width: 2px; }
+  .bracket-card .bracket-corner-b::after{ bottom: -1px; right: -1px; border-bottom-width: 2px; border-right-width: 2px; }
 
-    nav a:hover {
-      color: #ffffff;
-      background: #303030;
-      border-color: #d4af37;
-    }
+  .spec-head{
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 16px; padding-bottom: 18px; margin-bottom: 18px;
+    border-bottom: 1px solid var(--hairline);
+    flex-wrap: wrap;
+  }
+  .spec-head h3{
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 24px; font-weight: 700; margin: 0 0 4px;
+    text-transform: uppercase; letter-spacing: 0.02em;
+  }
+  .spec-head p{ margin: 0; color: var(--silver); font-size: 14px; }
+  .badge{
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--red);
+    border: 1px solid var(--red);
+    background: rgba(211,39,62,0.08);
+    padding: 5px 10px;
+    white-space: nowrap;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .badge .dot{
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 6px var(--red);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
 
-    /* Main page content */
+  ul.checklist{
+    list-style: none; margin: 0 0 22px; padding: 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px 20px;
+  }
+  ul.checklist li{
+    font-size: 14px; color: var(--white);
+    padding-left: 18px; position: relative;
+  }
+  ul.checklist li::before{
+    content: '›';
+    position: absolute; left: 0; color: var(--gold-bright); font-weight: 700;
+  }
+  .cta-row{ display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn{
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600; font-size: 13px;
+    letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 11px 18px;
+    border: 1px solid transparent;
+  }
+  .btn-primary{ background: var(--gold); color: #16130a; }
+  .btn-primary:hover{ background: var(--gold-bright); text-decoration: none; }
+  .btn-ghost{ border-color: var(--hairline); color: var(--white); }
+  .btn-ghost:hover{ border-color: var(--red); color: var(--red); text-decoration: none; }
 
-    main {
-      flex: 1;
-      padding: 70px 45px;
-    }
+  /* ABOUT */
+  .about-grid{ display: flex; gap: 40px; flex-wrap: wrap; }
+  .about-text{ flex: 1 1 320px; color: var(--silver-bright); font-size: 15px; }
+  .about-text strong{ color: var(--white); }
+  dl.facts{
+    flex: 0 0 220px;
+    margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 12.5px;
+  }
+  dl.facts div{ display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--hairline); }
+  dl.facts dt{ color: var(--silver); }
+  dl.facts dd{ margin: 0; color: var(--gold-bright); }
 
-    .content {
-      width: min(760px, 100%);
-      margin: 0 auto;
-    }
+  /* FOOTER */
+  footer{
+    border-top: 1px solid var(--hairline);
+    padding: 26px 0 40px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px; color: var(--silver);
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    letter-spacing: 0.03em;
+  }
+  footer a{ color: var(--silver); }
+  footer a:hover{ color: var(--gold-bright); }
 
-    .eyebrow {
-      margin-bottom: 10px;
-      color: #d4af37;
-      font-size: 14px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    h1 {
-  margin: 0 0 18px;
-  font-size: 48px;
-  line-height: 1.05;
-  letter-spacing: -1.5px;
-}
-
-    .intro {
-  margin-bottom: 35px;
-  color: #cccccc;
-  font-size: 20px;
-  max-width: 650px;
-}
-
-    .app-card {
-  padding: 30px;
-  background: linear-gradient(135deg, #222222, #1a1a1a);
-  border: 1px solid #3a3a3a;
-  border-radius: 16px;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
-}
-
-    .app-card h2 {
-      margin-top: 0;
-      margin-bottom: 5px;
-      color: #ffffff;
-      font-size: 30px;
-    }
-
-    .tagline {
-      margin-top: 0;
-      color: #d4af37;
-      font-weight: bold;
-    }
-
-    .app-card p {
-      color: #cccccc;
-    }
-
-    .button {
-  display: inline-block;
-  margin-top: 22px;
-  padding: 13px 18px;
-  color: #151515;
-  background: #d4af37;
-  border-radius: 10px;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-    .button:hover {
-      background: #e5c34e;
-    }
-
-    footer {
-      margin-top: 45px;
-      padding-top: 20px;
-      color: #888888;
-      border-top: 1px solid #333333;
-    }
-
-    footer a {
-      color: #c9ad4c;
-    }
-
-.badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 18px;
-}
-
-.badges span {
-  padding: 6px 10px;
-  color: #d4af37;
-  background: #151515;
-  border: 1px solid #3a3a3a;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-
-
-
-    
-    /* Phone layout */
-
-    @media (max-width: 700px) {
-      .page {
-        display: block;
-      }
-
-      .sidebar {
-        width: 100%;
-        padding: 22px 20px;
-        border-right: none;
-        border-bottom: 1px solid #333333;
-      }
-
-      .developer-label {
-        margin-bottom: 20px;
-      }
-
-      nav {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-      }
-
-      main {
-        padding: 45px 20px;
-      }
-
-      h1 {
-        font-size: 38px;
-      }
-    }
-
-    @media (max-width: 420px) {
-      nav {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+  @media (max-width: 560px){
+    .nav-row{ flex-direction: column; align-items: flex-start; gap: 12px; }
+    nav.links{ gap: 16px; flex-wrap: wrap; }
+    ul.checklist{ grid-template-columns: 1fr; }
+    .about-grid{ flex-direction: column; }
+    dl.facts{ flex-basis: auto; }
+  }
+</style>
 </head>
-
 <body>
-  <div class="page">
 
-    <aside class="sidebar">
-      <h2 class="brand">mistergou</h2>
-
-      <p class="developer-label">
-        Independent App Developer
-      </p>
-
-      <div class="menu-title">Pages</div>
-
-      <nav>
-        <a href="./">Home</a>
-        <a href="honestvin/">HonestVIN</a>
-        <a href="privacy/">Privacy Policy</a>
-        <a href="support/">Support</a>
-      </nav>
-    </aside>
-
-    <main>
-      <div class="content">
-     <div class="eyebrow">mistergou</div>
-
-<h1>Small apps. No nonsense.</h1>
-
-<p class="intro">
-  I build simple tools that try to be useful, honest, and not annoying.
-</p>
-
-        <section class="app-card">
-          <h2>HonestVIN</h2>
-
-          <p class="tagline">Know Before You Buy.</p>
-
-          <p>
-  A fast VIN risk checker for used-car shoppers.
-</p>
-
-<p>
-  Check recalls, complaints, safety info, VIN details, and buyer red flags —
-  without ads, accounts, or paywall games.
-</p>
-
-          <div class="badges">
-  <span>No account</span>
-  <span>No ads</span>
-  <span>No subscription</span>
-  <span>No paywall games</span>
-</div>
-
-          <a class="button" href="honestvin/">
-            Learn About HonestVIN
-          </a>
-        </section>
-
-        <footer>
-          <p>
-            Support:
-            <a href="mailto:mistergoudev@gmail.com">
-              mistergoudev@gmail.com
-            </a>
-          </p>
-
-          <p>&copy; 2026 mistergou </p>
-        </footer>
-      </div>
-    </main>
-
+<header class="site">
+  <div class="wrap nav-row">
+    <a class="brand" href="/"><span class="led" aria-hidden="true"></span>mistergou</a>
+    <nav class="links">
+      <a href="/">Home</a>
+      <a href="/honestvin/">HonestVIN</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="/support/">Support</a>
+    </nav>
   </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero" style="border-top:none;">
+    <div class="hud-frame">
+      <svg class="frame-draw" aria-hidden="true">
+        <rect x="1" y="1" width="99%" height="99%" />
+      </svg>
+      <p class="readout">System // Developer Profile</p>
+      <h1 class="callsign">mistergou</h1>
+      <p class="role">Independent App Developer </p>
+      <p class="lede">I build simple tools that try to be useful, honest, and not annoying — no ads, no paywalls, no accounts you didn't ask for.</p>
+      <div class="hud-foot">
+        <span>ORIGIN: CHATTANOOGA, TN</span>
+        <span>STATUS: ONLINE</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-head">Currently Shipping</h2>
+    <div class="bracket-card">
+      <span class="bracket-corner-b"></span>
+      <div class="spec-head">
+        <div>
+          <h3>HonestVIN</h3>
+          <p>A fast, honest VIN risk checker for used-car shoppers.</p>
+        </div>
+        <span class="badge"><span class="dot"></span>In Testing — Android</span>
+      </div>
+      <ul class="checklist">
+        <li>Recalls &amp; safety ratings</li>
+        <li>Owner complaint history</li>
+        <li>VIN structure breakdown</li>
+        <li>Buyer red-flag checklist</li>
+        <li>No account required</li>
+        <li>No ads, no paywall</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/honestvin/">Learn about HonestVIN</a>
+        <a class="btn btn-ghost" href="/support/">Get support</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-head">About</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p><strong>mistergou</strong> is a solo developer based in Chattanooga, TN, building small, focused apps — starting with tools for the used-car market, where honest information is harder to find than it should be.</p>
+        <p>No investors, no ad networks, no growth team. Just apps that do what they say.</p>
+      </div>
+      <dl class="facts">
+        <div><dt>Base</dt><dd>Chattanooga, TN</dd></div>
+        <div><dt>Focus</dt><dd>Mobile / Android</dd></div>
+        <div><dt>Status</dt><dd>Building</dd></div>
+        <div><dt>Contact</dt><dd><a href="mailto:mistergoudev@gmail.com">Email</a></dd></div>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<footer class="wrap">
+  <span>Support: <a href="mailto:mistergoudev@gmail.com">mistergoudev@gmail.com</a></span>
+  <span>© 2026 mistergou</span>
+</footer>
+
 </body>
 </html>
