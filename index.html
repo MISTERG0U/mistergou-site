@@ -102,23 +102,26 @@
     }
 
     h1 {
-      margin: 0 0 18px;
-      font-size: 48px;
-      line-height: 1.15;
-    }
+  margin: 0 0 18px;
+  font-size: 48px;
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+}
 
     .intro {
-      margin-bottom: 35px;
-      color: #cccccc;
-      font-size: 19px;
-    }
+  margin-bottom: 35px;
+  color: #cccccc;
+  font-size: 20px;
+  max-width: 650px;
+}
 
     .app-card {
-      padding: 28px;
-      background: #202020;
-      border: 1px solid #333333;
-      border-radius: 12px;
-    }
+  padding: 30px;
+  background: linear-gradient(135deg, #222222, #1a1a1a);
+  border: 1px solid #3a3a3a;
+  border-radius: 16px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+}
 
     .app-card h2 {
       margin-top: 0;
@@ -138,15 +141,15 @@
     }
 
     .button {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 12px 18px;
-      color: #151515;
-      background: #d4af37;
-      border-radius: 7px;
-      font-weight: bold;
-      text-decoration: none;
-    }
+  display: inline-block;
+  margin-top: 22px;
+  padding: 13px 18px;
+  color: #151515;
+  background: #d4af37;
+  border-radius: 10px;
+  font-weight: bold;
+  text-decoration: none;
+}
 
     .button:hover {
       background: #e5c34e;
@@ -163,6 +166,27 @@
       color: #c9ad4c;
     }
 
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.badges span {
+  padding: 6px 10px;
+  color: #d4af37;
+  background: #151515;
+  border: 1px solid #3a3a3a;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+
+
+    
     /* Phone layout */
 
     @media (max-width: 700px) {
@@ -213,7 +237,7 @@
         Independent App Developer
       </p>
 
-      <div class="menu-title">Navigation</div>
+      <div class="menu-title">Pages</div>
 
       <nav>
         <a href="./">Home</a>
@@ -245,9 +269,12 @@
             buying resources.
           </p>
 
-          <p>
-            No account required. No advertisements. No subscription.
-          </p>
+          <div class="badges">
+  <span>No account</span>
+  <span>No ads</span>
+  <span>No subscription</span>
+  <span>No paywall games</span>
+</div>
 
           <a class="button" href="honestvin/">
             Learn About HonestVIN
@@ -262,7 +289,7 @@
             </a>
           </p>
 
-          <p>&copy; 2026 mistergou</p>
+          <p>&copy; 2026 mistergou. Small apps. Bad judgment. Surprisingly useful.</p>
         </footer>
       </div>
     </main>
