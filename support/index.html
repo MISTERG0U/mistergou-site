@@ -1,1 +1,373 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>HonestVIN Support</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #151515;
+      color: #eeeeee;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+    }
+
+    .page {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 245px;
+      padding: 35px 24px;
+      background: #1d1d1d;
+      border-right: 1px solid #333333;
+    }
+
+    .brand {
+      margin: 0 0 5px;
+      color: #ffffff;
+      font-size: 28px;
+    }
+
+    .developer-label {
+      margin: 0 0 35px;
+      color: #999999;
+      font-size: 14px;
+    }
+
+    .menu-title {
+      margin-bottom: 12px;
+      color: #d4af37;
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    nav {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    nav a {
+      display: block;
+      padding: 12px 14px;
+      color: #dddddd;
+      text-decoration: none;
+      background: #252525;
+      border: 1px solid #333333;
+      border-radius: 7px;
+    }
+
+    nav a:hover {
+      color: #ffffff;
+      background: #303030;
+      border-color: #d4af37;
+    }
+
+    main {
+      flex: 1;
+      padding: 60px 45px;
+    }
+
+    .content {
+      width: min(800px, 100%);
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      margin-bottom: 8px;
+      color: #d4af37;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 44px;
+      line-height: 1.2;
+    }
+
+    h2 {
+      margin-top: 38px;
+      color: #d4af37;
+      font-size: 24px;
+    }
+
+    p,
+    li {
+      color: #cccccc;
+      font-size: 17px;
+    }
+
+    a {
+      color: #e2bf4f;
+    }
+
+    .contact-card {
+      margin: 30px 0;
+      padding: 24px;
+      background: #202020;
+      border-left: 4px solid #d4af37;
+      border-radius: 8px;
+    }
+
+    .contact-card h2 {
+      margin-top: 0;
+    }
+
+    .email-button {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 12px 18px;
+      color: #151515;
+      background: #d4af37;
+      border-radius: 7px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .email-button:hover {
+      background: #e5c34e;
+    }
+
+    .help-card {
+      margin: 18px 0;
+      padding: 22px;
+      background: #202020;
+      border: 1px solid #333333;
+      border-radius: 9px;
+    }
+
+    .help-card h3 {
+      margin-top: 0;
+      color: #ffffff;
+    }
+
+    footer {
+      margin-top: 50px;
+      padding-top: 20px;
+      color: #888888;
+      border-top: 1px solid #333333;
+    }
+
+    @media (max-width: 700px) {
+      .page {
+        display: block;
+      }
+
+      .sidebar {
+        width: 100%;
+        padding: 22px 20px;
+        border-right: none;
+        border-bottom: 1px solid #333333;
+      }
+
+      .developer-label {
+        margin-bottom: 20px;
+      }
+
+      nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      main {
+        padding: 40px 20px;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      nav {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <aside class="sidebar">
+      <h2 class="brand">mistergou</h2>
+
+      <p class="developer-label">
+        Independent App Developer
+      </p>
+
+      <div class="menu-title">Navigation</div>
+
+      <nav>
+        <a href="../">Home</a>
+        <a href="../honestvin/">HonestVIN</a>
+        <a href="../privacy/">Privacy Policy</a>
+        <a href="./">Support</a>
+      </nav>
+    </aside>
+
+    <main>
+      <div class="content">
+
+        <div class="eyebrow">HonestVIN Help</div>
+
+        <h1>HonestVIN Support</h1>
+
+        <p>
+          Need help with HonestVIN, found incorrect vehicle information,
+          or discovered something that is not working properly? Send an
+          email and include as much detail as you are comfortable sharing.
+        </p>
+
+        <section class="contact-card">
+          <h2>Contact Support</h2>
+
+          <p>
+            Email:
+            <a href="mailto:mistergoudev@gmail.com">
+              mistergoudev@gmail.com
+            </a>
+          </p>
+
+          <p>
+            Helpful details include your Android version, HonestVIN app
+            version, what you were trying to do, and what happened.
+          </p>
+
+          <p>
+            You do not need to include a complete VIN unless it is relevant
+            to the problem and you are comfortable sharing it.
+          </p>
+
+          <a
+            class="email-button"
+            href="mailto:mistergoudev@gmail.com?subject=HonestVIN%20Support%20Request"
+          >
+            Email HonestVIN Support
+          </a>
+        </section>
+
+        <h2>Common Questions</h2>
+
+        <section class="help-card">
+          <h3>The VIN will not scan</h3>
+
+          <p>
+            Make sure the VIN is clearly visible, use good lighting, avoid
+            glare, and hold the phone steady. You can also enter the
+            17-character VIN manually.
+          </p>
+        </section>
+
+        <section class="help-card">
+          <h3>Some vehicle information is missing</h3>
+
+          <p>
+            HonestVIN relies on publicly available vehicle and safety data.
+            Some vehicles may have incomplete records, unavailable ratings,
+            delayed information, or no reported complaints.
+          </p>
+
+          <p>
+            Missing information does not prove that a vehicle has no problems.
+            Always verify important details and obtain a professional
+            inspection before buying a used vehicle.
+          </p>
+        </section>
+
+        <section class="help-card">
+          <h3>The report will not load</h3>
+
+          <p>
+            Confirm that your phone has an internet connection and try the
+            search again. A public data service may occasionally be delayed
+            or temporarily unavailable.
+          </p>
+        </section>
+
+        <section class="help-card">
+          <h3>The app shows the wrong vehicle</h3>
+
+          <p>
+            Double-check every VIN character. The letters I, O, and Q are not
+            normally used in standard 17-character VINs because they can be
+            confused with numbers.
+          </p>
+
+          <p>
+            Please report incorrect results so they can be investigated.
+          </p>
+        </section>
+
+        <section class="help-card">
+          <h3>How do I remove saved app information?</h3>
+
+          <p>
+            HonestVIN stores saved VINs, cached reports, and related app
+            information locally on your device.
+          </p>
+
+          <p>
+            You can remove all locally stored HonestVIN information through
+            your phone's Android app-storage settings or by uninstalling the
+            app. Menu wording may differ depending on the phone manufacturer.
+          </p>
+        </section>
+
+        <section class="help-card">
+          <h3>Can HonestVIN guarantee a vehicle is reliable?</h3>
+
+          <p>
+            No. HonestVIN is a research and risk-screening tool, not a
+            guarantee, professional inspection, official title report, or
+            complete vehicle-history report.
+          </p>
+
+          <p>
+            Use HonestVIN as one part of the buying process and have the
+            vehicle inspected by a qualified mechanic.
+          </p>
+        </section>
+
+        <h2>Privacy</h2>
+
+        <p>
+          Learn how HonestVIN handles VIN searches, camera scanning, locally
+          saved information, reports, and third-party services in the
+          <a href="../privacy/">HonestVIN Privacy Policy</a>.
+        </p>
+
+        <footer>
+          <p>
+            HonestVIN support provided by
+            <a href="../">mistergou</a>.
+          </p>
+
+          <p>&copy; 2026 mistergou</p>
+        </footer>
+
+      </div>
+    </main>
+
+  </div>
+</body>
+</html>
